@@ -17,15 +17,14 @@ public class AdminService implements UserDetailsService {
     @Autowired
     private AdminRepository adminRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
     public boolean existsByUsername(String username) {
         return adminRepository.existsByUsername(username);
     }
 
     public Admin saveAdmin(Admin admin) {
-        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        admin.setPassword(PasswordEncoder.encode(admin.getPassword()));
         return adminRepository.save(admin);
     }
 
